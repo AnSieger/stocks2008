@@ -1,7 +1,8 @@
 // Dir
+global.dir_stock = './stock';
+global.dir_data = './data';
+module.exports = {dir_stock,dir_data};
 
 
-var dir_base = './data';
-var dir_database = dir_base + 'database';
-
-module.exports = {dir_base,dir_database};
+//URL
+global.url_base = "https://www.alphavantage.co/query";
