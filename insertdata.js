@@ -6,14 +6,14 @@ let APIKeys = JSON.parse(rawdataapi);
 let rawdatasymobl = fs.readFileSync("./data/Symbol.json");
 let Symbol = JSON.parse(rawdatasymobl);
 
-let rawdataerror = fs.readFileSync("./stock/ENTG.json");
+let rawdataerror = fs.readFileSync("./stock/SWM.json");
 let error = JSON.parse(rawdataerror);
 
 for(var myKey in error){
     console.log(myKey);
 }
 
-console.log(!Object.keys(error) == 'Note');
+console.log(Object.keys(error) == 'Note');
 
 
 /*

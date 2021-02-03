@@ -10,7 +10,7 @@ init_process.init();
 
 let MaxRequestAtDay = 500;
 let CurrentRequest =  1;
-let RequestinSec = 16;
+let RequestinSec = 30;
 let Symbolcounter = 0;
 
 //APIKeys
@@ -20,12 +20,12 @@ let APIKeys = JSON.parse(rawdataapi);
 //Symbol e.g. IBM
 let rawdatasymobl = fs.readFileSync("./data/Symbol.json");
 let Symbol = JSON.parse(rawdatasymobl);
+/*
 let Symbolarry = [];
 for(var Key in Symbol){;
   Symbolarry.push(Key);
   Symbolcounter++;
 }
-
 
 for(let User in APIKeys["APIKeys"]){
   while(CurrentRequest < MaxRequestAtDay && Symbolcounter >= 0){
@@ -38,6 +38,20 @@ for(let User in APIKeys["APIKeys"]){
   }
   CurrentRequest = 1;
 }
+*/
+
+for(let Sym in Symbol){;
+   if(!fs.existsSync(dir_stock + "/" + Sym + ".json")){
+      if(CurrentRequest < MaxRequestAtDay){
+      setTimeout(function () {
+        console.log("Do: " + Sym);
+        apirequest(Sym,APIKeys["APIKeys"]["user1"]["key"]);
+        }, 1000 * RequestinSec * CurrentRequest);
+        CurrentRequest++
+      }
+   }
+}
+
 
 
 /*
@@ -56,6 +70,8 @@ function apirequest(symbol,apikey){
     Url.searchParams.append("symbol",symbol);
     Url.searchParams.append("outputsize","full");
     Url.searchParams.append("apikey",apikey);
+
+    //console.log(Url);
 
 
     let filechecker = require("fs");
@@ -88,14 +104,16 @@ function apirequest(symbol,apikey){
           res.on('end', () => {
             try {
               let parsedData = JSON.parse(rawData);
-              if(!Object.keys(parsedData) == 'Note'){
+              if(Object.keys(parsedData) == "Note"){
+                "Limit reached"
+              }
                 //Request limit was not reached. File will be created
                 let filewriter = require("fs");
                 filewriter.appendFile(dir_stock + "/" + symbol + ".json",JSON.stringify(parsedData), function (err) {
                     if (err) throw err;
                     console.log(err);
                 });
-              }
+              
             } catch (e) {
               console.error(e.message);
             }
