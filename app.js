@@ -6,7 +6,7 @@ const { dir_stock } = require('./config');
 const { setTimeout } = require('timers');
 
 init_process.init();
-
+console.log("Start");
 
 let MaxRequestAtDay = 500;
 let CurrentRequest =  1;
@@ -45,7 +45,7 @@ for(let Sym in Symbol){;
       if(CurrentRequest < MaxRequestAtDay){
       setTimeout(function () {
         console.log("Do: " + Sym);
-        apirequest(Sym,APIKeys["APIKeys"]["user1"]["key"]);
+        apirequest(Sym,APIKeys["APIKeys"]["user2"]["key"]);
         }, 1000 * RequestinSec * CurrentRequest);
         CurrentRequest++
       }
