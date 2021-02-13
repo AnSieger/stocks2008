@@ -5,8 +5,8 @@ let data = {}; //output. Chartdata
 let labels = [] //part of output. X Achse
 let datasets = [] //part of output. Y Achse
 
-const from_date = new Date('2007-01-01');
-let current_date = new Date('2007-01-01');
+const from_date = new Date('2008-08-01');
+let current_date = new Date('2008-08-01');
 const to_date = new Date('2008-12-20'); // - 1
 
 while(to_date >= current_date){
